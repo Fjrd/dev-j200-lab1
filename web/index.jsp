@@ -11,6 +11,11 @@
     <title>Welcome</title>
   </head>
   <body>
+  <% String msg = (String) request.getAttribute("msg");
+  if (msg != null) {
+      out.println(msg);
+  }
+  %>
 
   <form name="Enter your message" method="post" action="/hello">
       <b>Message:</b>

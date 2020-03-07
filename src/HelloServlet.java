@@ -8,21 +8,27 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/hello")
 public class HelloServlet extends HttpServlet {
+
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         PrintWriter writer = response.getWriter();
         String message = request.getParameter("message");
 
         try {
             if (message.trim().isEmpty()){
-                response.sendRedirect("http://127.0.0.1:8080/index.jsp");
+                request.setAttribute("msg", "Try again (Попробуйте еще раз)");
+                request.getRequestDispatcher("index.jsp").forward(request,response);
             }
 
             try{
-                Double d = Double.parseDouble(message);
-                writer.println("<p>Message is number: " + (d+1) + "</p>");
+                int i= Integer.parseInt(message);
+                writer.println("<p>Message is number: " + (i+1) + "</p>");
+
             }
             catch (NumberFormatException e){
                 String[] words = message.split("\\s+");
