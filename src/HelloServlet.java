@@ -13,12 +13,23 @@ public class HelloServlet extends HttpServlet {
 
         response.setContentType("text/html");
         PrintWriter writer = response.getWriter();
-
         String message = request.getParameter("message");
 
-
         try {
-            writer.println("<p>Message: " + message + "</p>");
+            if (message.trim().isEmpty()){
+                response.sendRedirect("http://127.0.0.1:8080/index.jsp");
+            }
+
+            try{
+                Double d = Double.parseDouble(message);
+                writer.println("<p>Message is number: " + (d+1) + "</p>");
+            }
+            catch (NumberFormatException e){
+                String[] words = message.split("\\s+");
+                writer.println("<p>Message: "+ message + "</p>");
+                writer.println("<p>Number of words: "+ words.length + "</p>");
+            }
+
         } finally {
             writer.close();
         }
