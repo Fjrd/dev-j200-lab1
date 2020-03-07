@@ -11,6 +11,12 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+
+  <form name="Message" method="post" action="/hello">
+      <b>Message:</b>
+      <input name="message" type="text" size="=40">
+      <input type="submit" value="Submit">
+  </form>
+
   </body>
 </html>
